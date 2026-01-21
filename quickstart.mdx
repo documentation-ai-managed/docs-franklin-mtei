@@ -1,0 +1,140 @@
+---
+title: Getting Started with AI4TZA
+description: Set up your account and launch your first AI project to begin leveraging AI solutions for Tanzanian challenges.
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+<Callout kind="info">
+- A modern web browser like Chrome or Firefox
+- An active email address for verification
+- Basic familiarity with web dashboards
+</Callout>
+
+<Callout kind="tip">
+Visit [https://app.ai4tza.com](https://app.ai4tza.com) to get started.
+</Callout>
+
+## Register Your Account
+
+Follow these steps to create your AI4TZA account quickly.
+
+<Steps>
+  <Step title="Visit the Signup Page" icon="user-plus">
+    Navigate to [https://app.ai4tza.com/signup](https://app.ai4tza.com/signup).
+  </Step>
+  <Step title="Enter Your Details" icon="edit-3">
+    Provide your email, full name, and a strong password. AI4TZA uses secure hashing for passwords.
+  </Step>
+  <Step title="Verify Email" icon="mail">
+    Check your inbox for a verification link and click it to activate your account.
+  </Step>
+  <Step title="Complete Profile" icon="settings">
+    Add your organization details, such as location in Tanzania, to unlock region-specific AI models.
+  </Step>
+</Steps>
+
+## Create Your First Project
+
+Once logged in, launch your initial AI project targeting Tanzanian challenges like agriculture or healthcare.
+
+<Steps>
+  <Step title="Access Dashboard" icon="layout-dashboard">
+    Log in at [https://app.ai4tza.com/dashboard](https://app.ai4tza.com/dashboard).
+  </Step>
+  <Step title="New Project" icon="plus-circle">
+    Click the `+ New Project` button and select a template, such as "Crop Yield Prediction" for farming AI.
+  </Step>
+  <Step title="Configure Basics" icon="sliders">
+    Name your project (e.g., "TZA Maize Optimizer") and set visibility to private or public.
+  </Step>
+</Steps>
+
+## Dashboard Walkthrough
+
+The AI4TZA dashboard provides tools to manage your AI initiatives.
+
+<Columns cols={3}>
+  <Card title="Projects" icon="folder" href="#projects">
+    View, edit, and monitor all your AI projects in one place.
+  </Card>
+  <Card title="Models" icon="cpu" href="#models">
+    Access pre-trained models fine-tuned for Tanzanian datasets.
+  </Card>
+  <Card title="Analytics" icon="bar-chart-3" href="#analytics">
+    Track model performance with metrics like accuracy and inference time.
+  </Card>
+</Columns>
+
+## Basic Project Setup
+
+Integrate AI4TZA into your application using the API. First, generate an API key from your project settings.
+
+<Tabs>
+  <Tab title="JavaScript" icon="code">
+    Install the client SDK and make your first request.
+
+````javascript
+npm install ai4tza-sdk
+````
+
+    ```javascript
+    import { AI4TZA } from 'ai4tza-sdk';
+
+    const client = new AI4TZA({ apiKey: 'YOUR_API_KEY' });
+
+    async function predictCropYield(data) {
+      const result = await client.projects.predict('tza-maize-optimizer', data);
+      console.log(result.prediction);
+    }
+
+    // Example usage
+    predictCropYield({ farmSize: 5, rainfall: 800 });
+    ```
+  </Tab>
+  <Tab title="Python" icon="python">
+    Use pip to install and query your project.
+
+````bash
+pip install ai4tza
+````
+
+    ```python
+    from ai4tza import Client
+
+    client = Client(api_key="YOUR_API_KEY")
+
+    def predict_crop_yield(data):
+        result = client.projects.predict("tza-maize-optimizer", data)
+        print(result["prediction"])
+
+    # Example usage
+    predict_crop_yield({"farm_size": 5, "rainfall": 800})
+    ```
+  </Tab>
+</Tabs>
+
+<ParamField path="projectId" param-type="string" required="true">
+  Your project identifier from the dashboard.
+</ParamField>
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Bearer `{YOUR_API_KEY}`.
+</ParamField>
+
+## Next Steps
+
+<Columns cols={2}>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your API calls with advanced auth methods.
+  </Card>
+  <Card title="Advanced Guides" icon="book-open" href="/introduction">
+    Dive deeper into AI4TZA features.
+  </Card>
+</Columns>
+
+<Callout kind="success">
+Congratulations! You've launched your first AI project. Explore the dashboard to iterate and deploy models addressing Tanzania's unique challenges.
+</Callout>

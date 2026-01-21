@@ -1,0 +1,159 @@
+---
+title: Authentication and Permissions
+description: Learn how to securely access AI4TZA resources using authentication methods tailored for developers and organizations.
+---
+
+## Overview
+
+AI4TZA provides secure authentication for accessing its APIs and resources. You can use API keys for simple server-to-server requests or OAuth 2.0 for user-facing applications, especially tailored for Tanzanian developers and organizations. Role-based access control (RBAC) ensures permissions align with your needs.
+
+<Callout kind="info">
+  All requests to `https://api.example.com` require authentication. Start with API keys for quick setup.
+</Callout>
+
+## Generate and Manage API Keys
+
+Create API keys from the AI4TZA dashboard at `https://dashboard.example.com`.
+
+<Steps>
+  <Step title="Sign In" icon="log-in">
+    Log in to your account using your credentials.
+  </Step>
+  <Step title="Navigate to Keys" icon="key">
+    Go to **Account > API Keys**.
+  </Step>
+  <Step title="Create Key" icon="plus">
+    Click **Generate New Key** and copy the value immediately—it shows only once.
+  </Step>
+  <Step title="Manage Keys" icon="settings">
+    Review active keys, set permissions, or revoke unused ones.
+  </Step>
+</Steps>
+
+Use the API key in the `Authorization` header.
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Format: `Bearer YOUR_API_KEY`. Replace `YOUR_API_KEY` with your generated key.
+</ParamField>
+
+## API Key Usage Examples
+
+Authenticate requests across languages.
+
+<CodeGroup tabs="JavaScript,Python,cURL">
+  ```javascript
+  const response = await fetch('https://api.example.com/v1/resources', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
+  ```
+  ```python
+  import requests
+
+  headers = {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+  }
+  response = requests.get('https://api.example.com/v1/resources', headers=headers)
+  data = response.json()
+  print(data)
+  ```
+  ```bash
+  curl -X GET https://api.example.com/v1/resources \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -H "Content-Type: application/json"
+  ```
+</CodeGroup>
+
+<ResponseField name="resources" field-type="array" required="true">
+  List of available AI4TZA resources.
+</ResponseField>
+
+<ResponseField name="error" field-type="string">
+  Appears if authentication fails.
+</ResponseField>
+
+## OAuth 2.0 for Tanzanian Users
+
+OAuth integrates seamlessly for web and mobile apps, supporting Tanzanian mobile money providers.
+
+<Tabs>
+  <Tab title="Web App" icon="globe">
+    Redirect users to `https://auth.example.com/oauth/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=https://yourapp.com/callback&scope=read write&response_type=code`.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+      const code = new URLSearchParams(window.location.search).get('code');
+      const tokenResponse = await fetch('https://auth.example.com/oauth/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          client_id: 'YOUR_CLIENT_ID',
+          client_secret: 'YOUR_CLIENT_SECRET',
+          code: code,
+          redirect_uri: 'https://yourapp.com/callback'
+        })
+      });
+      ```
+      ```python
+      import requests
+
+      data = {
+          'grant_type': 'authorization_code',
+          'client_id': 'YOUR_CLIENT_ID',
+          'client_secret': 'YOUR_CLIENT_SECRET',
+          'code': 'AUTH_CODE',
+          'redirect_uri': 'https://yourapp.com/callback'
+      }
+      token = requests.post('https://auth.example.com/oauth/token', data=data).json()
+      ```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Mobile App" icon="smartphone">
+    Use PKCE for secure mobile flows. Register your app in the dashboard first.
+  </Tab>
+</Tabs>
+
+## Role-Based Permissions
+
+Assign roles to control access.
+
+<Columns cols={2}>
+  <Card title="Developer" icon="code" href="#">
+    Read/write API access for testing.
+  </Card>
+  <Card title="Admin" icon="shield" href="#">
+    Full access including user management.
+  </Card>
+  <Card title="Viewer" icon="eye" href="#">
+    Read-only access to resources.
+  </Card>
+  <Card title="Org Owner" icon="users" href="#">
+    Manage team permissions and billing.
+  </Card>
+</Columns>
+
+## Security Best Practices
+
+<Callout kind="alert">
+  Never expose API keys or tokens in client-side code. Use server-side proxies.
+</Callout>
+
+<Expandable title="Advanced Security" default-open="false">
+  Rotate keys every 90 days. Monitor usage logs in the dashboard. Enable IP whitelisting for production.
+</Expandable>
+
+Store secrets securely:
+
+````bash
+# Environment variables
+export AI4TZA_API_KEY="your-api-key-here"
+````
+
+Follow these practices to protect your AI4TZA integration.

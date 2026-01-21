@@ -1,0 +1,131 @@
+---
+title: Changelog
+description: Track the latest updates, features, and improvements in the AI4TZA platform.
+---
+
+## Recent Updates
+
+Stay informed about the latest releases for the AI4TZA platform. You receive new features, bug fixes, and performance improvements with each version. Check the tags to identify breaking changes or new capabilities.
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time AI model inference endpoint at `https://api.example.com/v1/infer`
+- Introduced dashboard analytics for model performance tracking at `https://dashboard.example.com/analytics`
+- Enabled webhook support for custom notifications
+
+## Improvements
+
+- Optimized inference latency by 40% for large language models
+- Enhanced error handling with detailed response codes
+
+## Bug Fixes
+
+- Fixed authentication token refresh issues
+- Resolved dashboard loading errors on slow networks
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Launched Tanzanian language support for AI models
+- Added API key management in the dashboard
+
+## Bug Fixes
+
+- Corrected query parameter parsing in `/v1/models` endpoint
+- Fixed intermittent failures in batch processing jobs
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## Initial Release
+
+- Core AI inference API with Swahili and English support
+- User dashboard for API usage monitoring
+- Basic authentication via API keys
+
+## Breaking Changes
+
+- Updated endpoint paths from `/api/v0` to `/v1`
+
+</Update>
+
+## Updating the Platform
+
+Follow these steps to update your AI4TZA client SDK to the latest version. You ensure access to the newest features and security patches.
+
+<Steps>
+  <Step title="Check Current Version" icon="package">
+    Run the version check command in your terminal.
+
+    <CodeGroup tabs="npm,yarn">
+    ````bash
+    npm list ai4tza-sdk
+    ````
+
+    ````bash
+    yarn list ai4tza-sdk
+    ````
+    </CodeGroup>
+  </Step>
+
+  <Step title="Install Latest" icon="download">
+    Update to the latest version.
+
+    <Tabs>
+      <Tab title="npm" icon="npm">
+      ````bash
+      npm install ai4tza-sdk@latest
+      ````
+      </Tab>
+      <Tab title="yarn" icon="yarn">
+      ````bash
+      yarn add ai4tza-sdk@latest
+      ````
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Verify Update" icon="check-circle">
+    Test the new inference endpoint.
+
+    ````javascript
+    import { AI4TZA } from 'ai4tza-sdk';
+
+    const client = new AI4TZA({ apiKey: 'YOUR_API_KEY' });
+    const result = await client.infer({ prompt: 'Hello, Tanzania!' });
+    console.log(result);
+    ````
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Subscribe to updates via the dashboard at `https://dashboard.example.com/notifications` to receive email alerts for new releases.
+</Callout>
+
+## Upcoming Roadmap
+
+Explore planned features that empower your AI initiatives in Tanzania.
+
+<Columns cols={3}>
+  <Card title="v1.3.0" icon="zap" href="#recent-updates">
+    Multi-modal AI support (vision + text).
+  </Card>
+
+  <Card title="v1.4.0" icon="trending-up" href="#recent-updates">
+    Advanced fine-tuning tools for local datasets.
+  </Card>
+
+  <Card title="v2.0.0" icon="rocket" href="#recent-updates">
+    Edge deployment for on-device inference.
+  </Card>
+</Columns>
+
+<Expandable title="Detailed Roadmap" default-open="false">
+  You find more details in our public roadmap. Key priorities include Swahili NLP enhancements and integration with Tanzanian government data sources.
+</Expandable>
